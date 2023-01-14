@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import Country from './components/Country/Country';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -10,27 +11,25 @@ function App() {
     .then(res => res.json())
     .then(data => 
 
-      setCountries(data)
+    { 
+       setCountries(data.slice(0, 4))
+      .catch(err => console.log(err))
+    }
     
     )
 
   }, [])
   return (
-    <div className="App">
+    <div >
+      <header>
       <h1>Countries: {countries.length}</h1>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <div className='country-div'>
+          {
+          countries.map(country => <Country country={country} key={country.ccn3}></Country>)
+          }
+      </div>
+          
+      
       </header>
     </div>
   );
