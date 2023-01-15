@@ -9,25 +9,26 @@ function App() {
   useEffect(() =>{
     fetch("https://restcountries.com/v3.1/all")
     .then(res => res.json())
-    .then(data => 
-
-    { 
-       setCountries(data.slice(0, 4))
+    .then(data => { 
+       setCountries(data)
       .catch(err => console.log(err))
-    }
-    
-    )
-
+    })
   }, [])
+
+  const handleAddCountry = (country) => {console.log("Add country clicked", country)};
+
   return (
     <div >
       <header>
-      <h1>Countries: {countries.length}</h1>
+      <h1 className='headline'>Details of {countries.length} Countries: </h1>
+      <p></p>
+      
       <div className='country-div'>
           {
-          countries.map(country => <Country country={country} key={country.ccn3}></Country>)
+          countries.map(country => <Country country={country} handleAddCountry = {handleAddCountry} key={country.ccn3}></Country>)
           }
       </div>
+    
           
       
       </header>
